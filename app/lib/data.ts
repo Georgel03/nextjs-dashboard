@@ -158,8 +158,10 @@ export async function fetchInvoiceById(id: string) {
       ...invoice,
       // Convert amount from cents to dollars
       amount: invoice.amount / 100,
+      // normalize DB snake_case to front-end camelCase
+      customerId: (invoice as any).customer_id,
     }));
-
+    console.log(invoice);
     return invoice[0];
   } catch (error) {
     console.error('Database Error:', error);
